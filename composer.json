@@ -1,6 +1,7 @@
 {
     "name": "zhem4ag/event-snoozer",
     "description": "Snooze your events for later dispatch.",
+    "license": "MIT",
     "authors": [
         {
             "name": "Evgeny Vyatkin",
@@ -14,5 +15,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8"
+    },
+    "suggest": {
+        "symfony/console": "For launching console jobs",
+        "doctrine/common": "Allows to save events in database"
     }
 }
