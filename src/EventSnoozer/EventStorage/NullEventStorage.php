@@ -31,4 +31,13 @@ class NullEventStorage implements EventStorageInterface
     {
         return array();
     }
+
+    /**
+     * @param StoredEventInterface $event
+     * @return bool
+     */
+    public function removeEvent(StoredEventInterface $event)
+    {
+        return true;
+    }
 }

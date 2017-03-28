@@ -22,4 +22,10 @@ interface EventStorageInterface
      * @return StoredEventInterface[]
      */
     public function fetchMultipleEvents($count = 1);
+
+    /**
+     * @param StoredEventInterface $event
+     * @return bool
+     */
+    public function removeEvent(StoredEventInterface $event);
 }
