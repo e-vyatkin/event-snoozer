@@ -36,7 +36,7 @@ class StoredEvent implements StoredEventInterface
     {
         $this->priority = 0;
         $this->runtime = new \DateTime();
-        $this->additionalData = [];
+        $this->additionalData = array();
     }
 
     /**
