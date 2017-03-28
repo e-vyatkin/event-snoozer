@@ -25,6 +25,11 @@ class StoredEvent implements StoredEventInterface
     protected $additionalData;
 
     /**
+     * @var string
+     */
+    protected $eventName;
+
+    /**
      * StoredEvent constructor.
      */
     public function __construct()
@@ -70,6 +75,25 @@ class StoredEvent implements StoredEventInterface
     public function getEventClass()
     {
         return $this->className;
+    }
+
+    /**
+     * @param string $eventName
+     * @return StoredEventInterface
+     */
+    public function setEventName($eventName)
+    {
+        $this->eventName = $eventName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEventName()
+    {
+        return $this->eventName;
     }
 
     /**

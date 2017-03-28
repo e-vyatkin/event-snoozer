@@ -27,6 +27,17 @@ interface StoredEventInterface
     public function getEventClass();
 
     /**
+     * @param string $eventName
+     * @return StoredEventInterface
+     */
+    public function setEventName($eventName);
+
+    /**
+     * @return string
+     */
+    public function getEventName();
+
+    /**
      * @param int $priority
      * @return StoredEventInterface
      */
