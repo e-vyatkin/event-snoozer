@@ -14,4 +14,21 @@ class NullEventStorage implements EventStorageInterface
     {
         return true;
     }
+
+    /**
+     * @return StoredEventInterface
+     */
+    public function fetchEvent()
+    {
+        return null;
+    }
+
+    /**
+     * @param int $count
+     * @return StoredEventInterface[]
+     */
+    public function fetchMultipleEvents($count = 1)
+    {
+        return array();
+    }
 }

@@ -11,4 +11,15 @@ interface EventStorageInterface
      * @return bool
      */
     public function saveEvent(StoredEventInterface $event);
+
+    /**
+     * @return StoredEventInterface
+     */
+    public function fetchEvent();
+
+    /**
+     * @param int $count
+     * @return StoredEventInterface[]
+     */
+    public function fetchMultipleEvents($count = 1);
 }
