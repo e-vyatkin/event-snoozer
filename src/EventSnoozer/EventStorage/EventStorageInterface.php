@@ -1,6 +1,6 @@
 <?php
 
-namespace EventSnoozer\EventSnoozer;
+namespace EventSnoozer\EventStorage;
 
 use EventSnoozer\StoredEvent\StoredEventInterface;
 
