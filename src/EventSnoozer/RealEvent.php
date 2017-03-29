@@ -45,9 +45,12 @@ class RealEvent extends Event
 
     /**
      * @param array $additionalData
+     * @return RealEvent
      */
     public function setAdditionalData(array $additionalData)
     {
         $this->additionalData = $additionalData;
+
+        return $this;
     }
 }
