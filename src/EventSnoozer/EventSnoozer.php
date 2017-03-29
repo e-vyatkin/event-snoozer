@@ -32,18 +32,20 @@ class EventSnoozer
 
     /**
      * @param string $eventName
-     * @param RealEvent $event
+     * @param Event $event
      * @param string $snoozeTime
      * @return bool
      */
-    public function snoozeEvent($eventName, RealEvent $event, $snoozeTime = '+1 min')
+    public function snoozeEvent($eventName, Event $event, $snoozeTime = '+1 min')
     {
         $storedEvent = new StoredEvent();
         $storedEvent->setEventClass(get_class($event))
             ->setEventName($eventName)
-            ->setRuntime(new \DateTime($snoozeTime))
-            ->setPriority($event->getPriority())
-            ->setAdditionalData($event->getAdditionalData());
+            ->setRuntime(new \DateTime($snoozeTime));
+        if ($event instanceof RealEvent) {
+            $storedEvent->setPriority($event->getPriority())
+                ->setAdditionalData($event->getAdditionalData());
+        }
 
         return $this->eventStorage->saveEvent($storedEvent);
     }
