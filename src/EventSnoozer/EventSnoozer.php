@@ -47,7 +47,7 @@ class EventSnoozer
                 ->setAdditionalData($event->getAdditionalData());
         }
 
-        return $this->eventStorage->saveEvent($storedEvent);
+        return $this->getEventStorage()->saveEvent($storedEvent);
     }
 
     /**
@@ -55,7 +55,7 @@ class EventSnoozer
      */
     public function dispatchSnoozedEvent()
     {
-        $event = $this->eventStorage->fetchEvent();
+        $event = $this->getEventStorage()->fetchEvent();
 
         if ($event instanceof StoredEventInterface) {
             if (class_exists($event->getEventClass())) {
@@ -69,7 +69,7 @@ class EventSnoozer
                 $this->dispatchEvent($event->getEventName(), $realEvent);
             }
 
-            $this->eventStorage->removeEvent($event);
+            $this->getEventStorage()->removeEvent($event);
         }
 
         return true;
@@ -81,7 +81,7 @@ class EventSnoozer
      */
     public function dispatchMultipleSnoozedEvents($count = 1)
     {
-        $events = $this->eventStorage->fetchMultipleEvents($count);
+        $events = $this->getEventStorage()->fetchMultipleEvents($count);
 
         $dispatched = 0;
         foreach ($events as $event) {
@@ -96,7 +96,7 @@ class EventSnoozer
                 $this->dispatchEvent($event->getEventName(), $realEvent);
                 $dispatched++;
             }
-            $this->eventStorage->removeEvent($event);
+            $this->getEventStorage()->removeEvent($event);
         }
 
         return $dispatched;
@@ -109,6 +109,22 @@ class EventSnoozer
      */
     public function dispatchEvent($eventName, Event $event)
     {
-        return $this->eventDispatcher->dispatch($eventName, $event);
+        return $this->getEventDispatcher()->dispatch($eventName, $event);
+    }
+
+    /**
+     * @return EventDispatcherInterface
+     */
+    protected function getEventDispatcher()
+    {
+        return $this->eventDispatcher;
+    }
+
+    /**
+     * @return EventStorageInterface
+     */
+    protected function getEventStorage()
+    {
+        return $this->eventStorage;
     }
 }
