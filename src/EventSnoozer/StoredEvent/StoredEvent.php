@@ -64,11 +64,14 @@ class StoredEvent implements StoredEventInterface
     }
 
     /**
-     * @param \DateTime $runtime
+     * @param \DateTime|string $runtime
      * @return StoredEventInterface
      */
-    public function setRuntime(\DateTime $runtime)
+    public function setRuntime($runtime)
     {
+        if (is_string($runtime)) {
+            $runtime = new \DateTime($runtime);
+        }
         $this->runtime = $runtime;
 
         return $this;

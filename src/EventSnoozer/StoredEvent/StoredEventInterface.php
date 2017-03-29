@@ -16,10 +16,10 @@ interface StoredEventInterface
     public function getId();
 
     /**
-     * @param \DateTime $runtime
+     * @param $runtime
      * @return StoredEventInterface
      */
-    public function setRuntime(\DateTime $runtime);
+    public function setRuntime($runtime);
 
     /**
      * @return \DateTime
