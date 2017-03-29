@@ -2,7 +2,7 @@
 
 namespace EventSnoozer;
 
-use EventSnoozer\EventSnoozer\EventStorageInterface;
+use EventSnoozer\EventStorage\EventStorageInterface;
 use EventSnoozer\StoredEvent\StoredEvent;
 use EventSnoozer\StoredEvent\StoredEventInterface;
 use Symfony\Component\EventDispatcher\Event;
