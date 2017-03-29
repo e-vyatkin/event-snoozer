@@ -5,6 +5,17 @@ namespace EventSnoozer\StoredEvent;
 interface StoredEventInterface
 {
     /**
+     * @param int|string $id
+     * @return StoredEventInterface
+     */
+    public function setId($id);
+
+    /**
+     * @return int|string
+     */
+    public function getId();
+
+    /**
      * @param \DateTime $runtime
      * @return StoredEventInterface
      */

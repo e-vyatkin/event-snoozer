@@ -56,7 +56,8 @@ class EventSnoozerTest extends \PHPUnit_Framework_TestCase
             ->setEventName('test.event')
             ->setRuntime(new \DateTime('-1 min'))
             ->setPriority(2)
-            ->setAdditionalData(array('key' => 'value'));
+            ->setAdditionalData(array('key' => 'value'))
+            ->setId(234);
 
         $eventStorageMock = $this->getMockBuilder('EventSnoozer\EventStorage\NullEventStorage')
             ->setMethods(array('fetchEvent', 'removeEvent'))
@@ -95,13 +96,15 @@ class EventSnoozerTest extends \PHPUnit_Framework_TestCase
             ->setEventName('test.event')
             ->setRuntime(new \DateTime('-1 hour'))
             ->setPriority(2)
-            ->setAdditionalData(array('key' => 'value'));
+            ->setAdditionalData(array('key' => 'value'))
+            ->setId(234);
         $storedEvent2 = new StoredEvent();
         $storedEvent2->setEventClass('Tests\EventSnoozer\TestEvent')
             ->setEventName('test.event')
             ->setRuntime(new \DateTime('-1 min'))
             ->setPriority(20)
-            ->setAdditionalData(array('key2' => 'value2'));
+            ->setAdditionalData(array('key2' => 'value2'))
+            ->setId(345);
 
         $eventStorageMock = $this->getMockBuilder('EventSnoozer\EventStorage\NullEventStorage')
             ->setMethods(array('fetchMultipleEvents', 'removeEvent'))

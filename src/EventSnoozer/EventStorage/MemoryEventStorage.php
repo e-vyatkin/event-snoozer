@@ -22,6 +22,7 @@ class MemoryEventStorage implements EventStorageInterface
      */
     public function saveEvent(StoredEventInterface $event)
     {
+        $event->setId(uniqid('es', true));
         $this->storedEvents[] = $event;
 
         return true;
@@ -73,7 +74,7 @@ class MemoryEventStorage implements EventStorageInterface
     public function removeEvent(StoredEventInterface $event)
     {
         foreach ($this->storedEvents as $key => $storedEvent) {
-            if ($storedEvent === $event) {
+            if ($storedEvent->getId() === $event->getId()) {
                 unset($this->storedEvents[$key]);
                 return true;
             }

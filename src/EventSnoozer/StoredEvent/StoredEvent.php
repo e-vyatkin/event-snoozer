@@ -5,6 +5,11 @@ namespace EventSnoozer\StoredEvent;
 class StoredEvent implements StoredEventInterface
 {
     /**
+     * @var int|string
+     */
+    protected $id;
+
+    /**
      * @var \DateTime
      */
     protected $runtime;
@@ -37,6 +42,25 @@ class StoredEvent implements StoredEventInterface
         $this->priority = 0;
         $this->runtime = new \DateTime();
         $this->additionalData = array();
+    }
+
+    /**
+     * @param int|string $id
+     * @return StoredEventInterface
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return int|string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**

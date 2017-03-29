@@ -15,7 +15,8 @@ class MemoryEventStorageTest extends \PHPUnit_Framework_TestCase
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
             ->setAdditionalData(array('key' => 'value'))
             ->setRuntime(new \DateTime('+1 day'))
-            ->setPriority(123);
+            ->setPriority(123)
+            ->setId(456);
 
         $memoryEventStorage = new MemoryEventStorage();
         $memoryEventStorage->saveEvent($storedEvent);
@@ -35,13 +36,15 @@ class MemoryEventStorageTest extends \PHPUnit_Framework_TestCase
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
             ->setAdditionalData(array('key' => 'value'))
             ->setRuntime(new \DateTime('+1 day'))
-            ->setPriority(123);
+            ->setPriority(123)
+            ->setId(456);
         $pastEvent = new StoredEvent();
         $pastEvent->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
             ->setAdditionalData(array('key' => 'value'))
             ->setRuntime(new \DateTime('-1 day'))
-            ->setPriority(123);
+            ->setPriority(123)
+            ->setId(654);
 
         $memoryEventStorage = new MemoryEventStorage();
         $reflectionClass = new \ReflectionClass($memoryEventStorage);
@@ -60,19 +63,22 @@ class MemoryEventStorageTest extends \PHPUnit_Framework_TestCase
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
             ->setAdditionalData(array('key' => 'value'))
             ->setRuntime(new \DateTime('+1 day'))
-            ->setPriority(123);
+            ->setPriority(123)
+            ->setId(234);
         $pastEvent1 = new StoredEvent();
         $pastEvent1->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
             ->setAdditionalData(array('key' => 'value'))
             ->setRuntime(new \DateTime('-1 day'))
-            ->setPriority(123);
+            ->setPriority(123)
+            ->setId(345);
         $pastEvent2 = new StoredEvent();
         $pastEvent2->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
             ->setAdditionalData(array('key' => 'value'))
             ->setRuntime(new \DateTime('-2 day'))
-            ->setPriority(10);
+            ->setPriority(10)
+            ->setId(456);
 
         $memoryEventStorage = new MemoryEventStorage();
         $reflectionClass = new \ReflectionClass($memoryEventStorage);
@@ -97,13 +103,15 @@ class MemoryEventStorageTest extends \PHPUnit_Framework_TestCase
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
             ->setAdditionalData(array('key' => 'value'))
             ->setRuntime(new \DateTime('+1 day'))
-            ->setPriority(123);
+            ->setPriority(123)
+            ->setId(234);
         $pastEvent = new StoredEvent();
         $pastEvent->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
             ->setAdditionalData(array('key' => 'value'))
             ->setRuntime(new \DateTime('-1 day'))
-            ->setPriority(123);
+            ->setPriority(123)
+            ->setId(345);
 
         $memoryEventStorage = new MemoryEventStorage();
         $reflectionClass = new \ReflectionClass($memoryEventStorage);
