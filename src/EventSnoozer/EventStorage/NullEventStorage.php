@@ -40,4 +40,18 @@ class NullEventStorage implements EventStorageInterface
     {
         return true;
     }
+
+    /**
+     * @param array $eventNames
+     */
+    public function setWhitelistEvents(array $eventNames)
+    {
+    }
+
+    /**
+     * @param array $eventNames
+     */
+    public function setBlacklistEvents(array $eventNames)
+    {
+    }
 }

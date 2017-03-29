@@ -28,4 +28,14 @@ interface EventStorageInterface
      * @return bool
      */
     public function removeEvent(StoredEventInterface $event);
+
+    /**
+     * @param array $eventNames
+     */
+    public function setWhitelistEvents(array $eventNames);
+
+    /**
+     * @param array $eventNames
+     */
+    public function setBlacklistEvents(array $eventNames);
 }

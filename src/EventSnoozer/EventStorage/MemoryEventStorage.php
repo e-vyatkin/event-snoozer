@@ -11,9 +11,21 @@ class MemoryEventStorage implements EventStorageInterface
      */
     private $storedEvents;
 
+    /**
+     * @var bool | true - whitelist; false - blacklist
+     */
+    private $mode;
+
+    /**
+     * @var array
+     */
+    private $eventRestrictions;
+
     public function __construct()
     {
         $this->storedEvents = array();
+        $this->mode = false;
+        $this->eventRestrictions = array();
     }
 
     /**
@@ -37,7 +49,7 @@ class MemoryEventStorage implements EventStorageInterface
 
         $now = new \DateTime();
         foreach ($this->storedEvents as $event) {
-            if ($event->getRuntime() < $now) {
+            if ($event->getRuntime() < $now && $this->passedRestrictions($event->getEventName())) {
                 return $event;
             }
         }
@@ -56,7 +68,7 @@ class MemoryEventStorage implements EventStorageInterface
         $events = array();
         $now = new \DateTime();
         foreach ($this->storedEvents as $event) {
-            if ($event->getRuntime() < $now) {
+            if ($event->getRuntime() < $now && $this->passedRestrictions($event->getEventName())) {
                 $events[] = $event;
                 if ($count === count($events)) {
                     break;
@@ -81,6 +93,34 @@ class MemoryEventStorage implements EventStorageInterface
         }
 
         return false;
+    }
+
+    /**
+     * @param array $eventNames
+     */
+    public function setWhitelistEvents(array $eventNames)
+    {
+        $this->eventRestrictions = $eventNames;
+        $this->mode = true;
+    }
+
+    /**
+     * @param array $eventNames
+     */
+    public function setBlacklistEvents(array $eventNames)
+    {
+        $this->eventRestrictions = $eventNames;
+        $this->mode = false;
+    }
+
+    /**
+     * @param string $eventName
+     * @return bool
+     */
+    private function passedRestrictions($eventName)
+    {
+        return ($this->mode && in_array($eventName, $this->eventRestrictions, true)) ||
+            (!$this->mode && !in_array($eventName, $this->eventRestrictions, true));
     }
 
     private function sortEvents()

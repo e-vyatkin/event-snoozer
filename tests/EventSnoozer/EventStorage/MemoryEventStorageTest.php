@@ -127,4 +127,60 @@ class MemoryEventStorageTest extends \PHPUnit_Framework_TestCase
         $leftEvents = $reflectionProperty->getValue($memoryEventStorage);
         self::assertSame(array(), $leftEvents);
     }
+
+    public function testWhitelistRestrictions()
+    {
+        $pastEvent1 = new StoredEvent();
+        $pastEvent1->setEventName('test.event1')
+            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setAdditionalData(array('key' => 'value'))
+            ->setRuntime(new \DateTime('-1 day'))
+            ->setPriority(123)
+            ->setId(345);
+        $pastEvent2 = new StoredEvent();
+        $pastEvent2->setEventName('test.event2')
+            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setAdditionalData(array('key' => 'value'))
+            ->setRuntime(new \DateTime('-2 day'))
+            ->setPriority(10)
+            ->setId(456);
+
+        $memoryEventStorage = new MemoryEventStorage();
+        $reflectionClass = new \ReflectionClass($memoryEventStorage);
+        $reflectionProperty = $reflectionClass->getProperty('storedEvents');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($memoryEventStorage, array($pastEvent1, $pastEvent2));
+        $memoryEventStorage->setWhitelistEvents(array('test.event2'));
+
+        $fetchedEvents = $memoryEventStorage->fetchMultipleEvents(2);
+        self::assertSame(array($pastEvent2), $fetchedEvents);
+    }
+
+    public function testBlacklistRestrictions()
+    {
+        $pastEvent1 = new StoredEvent();
+        $pastEvent1->setEventName('test.event1')
+            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setAdditionalData(array('key' => 'value'))
+            ->setRuntime(new \DateTime('-1 day'))
+            ->setPriority(123)
+            ->setId(345);
+        $pastEvent2 = new StoredEvent();
+        $pastEvent2->setEventName('test.event2')
+            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setAdditionalData(array('key' => 'value'))
+            ->setRuntime(new \DateTime('-2 day'))
+            ->setPriority(10)
+            ->setId(456);
+
+        $memoryEventStorage = new MemoryEventStorage();
+        $reflectionClass = new \ReflectionClass($memoryEventStorage);
+        $reflectionProperty = $reflectionClass->getProperty('storedEvents');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($memoryEventStorage, array($pastEvent1, $pastEvent2));
+        $memoryEventStorage->setBlacklistEvents(array('test.event2'));
+
+        $fetchedEvents = $memoryEventStorage->fetchMultipleEvents(2);
+        self::assertSame(array($pastEvent1), $fetchedEvents);
+    }
 }
