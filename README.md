@@ -1,3 +1,5 @@
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/80000129-230e-47ae-aeca-efc0f8f3a966/mini.png)](https://insight.sensiolabs.com/projects/80000129-230e-47ae-aeca-efc0f8f3a966)
+
 EventSnoozer  
 =  
 
