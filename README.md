@@ -1,4 +1,8 @@
+[![Build Status](https://travis-ci.org/zhem4ag/event-snoozer.svg?branch=master)](https://travis-ci.org/zhem4ag/event-snoozer)
+
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/80000129-230e-47ae-aeca-efc0f8f3a966/mini.png)](https://insight.sensiolabs.com/projects/80000129-230e-47ae-aeca-efc0f8f3a966)
+
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 EventSnoozer  
 =  
