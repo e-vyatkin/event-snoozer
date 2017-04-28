@@ -14,7 +14,7 @@ class MemoryEventStorageTest extends TestCase
         $storedEvent = new StoredEvent();
         $storedEvent->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('+1 day'))
             ->setPriority(123)
             ->setId(456);
@@ -27,7 +27,7 @@ class MemoryEventStorageTest extends TestCase
         $reflectionProperty->setAccessible(true);
         $storedEvents = $reflectionProperty->getValue($memoryEventStorage);
 
-        self::assertSame(array($storedEvent), $storedEvents);
+        self::assertSame([$storedEvent], $storedEvents);
     }
 
     public function testFetchEvent()
@@ -35,14 +35,14 @@ class MemoryEventStorageTest extends TestCase
         $futureEvent = new StoredEvent();
         $futureEvent->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('+1 day'))
             ->setPriority(123)
             ->setId(456);
         $pastEvent = new StoredEvent();
         $pastEvent->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
             ->setId(654);
@@ -51,7 +51,7 @@ class MemoryEventStorageTest extends TestCase
         $reflectionClass = new \ReflectionClass($memoryEventStorage);
         $reflectionProperty = $reflectionClass->getProperty('storedEvents');
         $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($memoryEventStorage, array($futureEvent, $pastEvent));
+        $reflectionProperty->setValue($memoryEventStorage, [$futureEvent, $pastEvent]);
 
         $fetchedEvent = $memoryEventStorage->fetchEvent();
         self::assertSame($pastEvent, $fetchedEvent);
@@ -62,21 +62,21 @@ class MemoryEventStorageTest extends TestCase
         $futureEvent = new StoredEvent();
         $futureEvent->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('+1 day'))
             ->setPriority(123)
             ->setId(234);
         $pastEvent1 = new StoredEvent();
         $pastEvent1->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
             ->setId(345);
         $pastEvent2 = new StoredEvent();
         $pastEvent2->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-2 day'))
             ->setPriority(10)
             ->setId(456);
@@ -85,16 +85,16 @@ class MemoryEventStorageTest extends TestCase
         $reflectionClass = new \ReflectionClass($memoryEventStorage);
         $reflectionProperty = $reflectionClass->getProperty('storedEvents');
         $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($memoryEventStorage, array($futureEvent, $pastEvent1, $pastEvent2));
+        $reflectionProperty->setValue($memoryEventStorage, [$futureEvent, $pastEvent1, $pastEvent2]);
 
         $fetchedEvents = $memoryEventStorage->fetchMultipleEvents(1);
-        self::assertSame(array($pastEvent1), $fetchedEvents);
+        self::assertSame([$pastEvent1], $fetchedEvents);
 
         $fetchedEvents = $memoryEventStorage->fetchMultipleEvents(2);
-        self::assertSame(array($pastEvent1, $pastEvent2), $fetchedEvents);
+        self::assertSame([$pastEvent1, $pastEvent2], $fetchedEvents);
 
         $fetchedEvents = $memoryEventStorage->fetchMultipleEvents(3);
-        self::assertSame(array($pastEvent1, $pastEvent2), $fetchedEvents);
+        self::assertSame([$pastEvent1, $pastEvent2], $fetchedEvents);
     }
 
     public function testRemoveEvent()
@@ -102,14 +102,14 @@ class MemoryEventStorageTest extends TestCase
         $futureEvent = new StoredEvent();
         $futureEvent->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('+1 day'))
             ->setPriority(123)
             ->setId(234);
         $pastEvent = new StoredEvent();
         $pastEvent->setEventName(TestEvent::NAME)
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
             ->setId(345);
@@ -118,15 +118,15 @@ class MemoryEventStorageTest extends TestCase
         $reflectionClass = new \ReflectionClass($memoryEventStorage);
         $reflectionProperty = $reflectionClass->getProperty('storedEvents');
         $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($memoryEventStorage, array($futureEvent, $pastEvent));
+        $reflectionProperty->setValue($memoryEventStorage, [$futureEvent, $pastEvent]);
 
         $memoryEventStorage->removeEvent($pastEvent);
         $leftEvents = $reflectionProperty->getValue($memoryEventStorage);
-        self::assertSame(array($futureEvent), $leftEvents);
+        self::assertSame([$futureEvent], $leftEvents);
 
         $memoryEventStorage->removeEvent($futureEvent);
         $leftEvents = $reflectionProperty->getValue($memoryEventStorage);
-        self::assertSame(array(), $leftEvents);
+        self::assertSame([], $leftEvents);
     }
 
     public function testWhitelistRestrictions()
@@ -134,14 +134,14 @@ class MemoryEventStorageTest extends TestCase
         $pastEvent1 = new StoredEvent();
         $pastEvent1->setEventName('test.event1')
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
             ->setId(345);
         $pastEvent2 = new StoredEvent();
         $pastEvent2->setEventName('test.event2')
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-2 day'))
             ->setPriority(10)
             ->setId(456);
@@ -150,11 +150,11 @@ class MemoryEventStorageTest extends TestCase
         $reflectionClass = new \ReflectionClass($memoryEventStorage);
         $reflectionProperty = $reflectionClass->getProperty('storedEvents');
         $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($memoryEventStorage, array($pastEvent1, $pastEvent2));
-        $memoryEventStorage->setWhitelistEvents(array('test.event2'));
+        $reflectionProperty->setValue($memoryEventStorage, [$pastEvent1, $pastEvent2]);
+        $memoryEventStorage->setWhitelistEvents(['test.event2']);
 
         $fetchedEvents = $memoryEventStorage->fetchMultipleEvents(2);
-        self::assertSame(array($pastEvent2), $fetchedEvents);
+        self::assertSame([$pastEvent2], $fetchedEvents);
     }
 
     public function testBlacklistRestrictions()
@@ -162,14 +162,14 @@ class MemoryEventStorageTest extends TestCase
         $pastEvent1 = new StoredEvent();
         $pastEvent1->setEventName('test.event1')
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
             ->setId(345);
         $pastEvent2 = new StoredEvent();
         $pastEvent2->setEventName('test.event2')
             ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
-            ->setAdditionalData(array('key' => 'value'))
+            ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-2 day'))
             ->setPriority(10)
             ->setId(456);
@@ -178,10 +178,10 @@ class MemoryEventStorageTest extends TestCase
         $reflectionClass = new \ReflectionClass($memoryEventStorage);
         $reflectionProperty = $reflectionClass->getProperty('storedEvents');
         $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($memoryEventStorage, array($pastEvent1, $pastEvent2));
-        $memoryEventStorage->setBlacklistEvents(array('test.event2'));
+        $reflectionProperty->setValue($memoryEventStorage, [$pastEvent1, $pastEvent2]);
+        $memoryEventStorage->setBlacklistEvents(['test.event2']);
 
         $fetchedEvents = $memoryEventStorage->fetchMultipleEvents(2);
-        self::assertSame(array($pastEvent1), $fetchedEvents);
+        self::assertSame([$pastEvent1], $fetchedEvents);
     }
 }

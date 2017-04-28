@@ -10,7 +10,7 @@ class NullEventStorage implements EventStorageInterface
      * @param StoredEventInterface $event
      * @return bool
      */
-    public function saveEvent(StoredEventInterface $event)
+    public function saveEvent(StoredEventInterface $event): bool
     {
         return true;
     }
@@ -27,16 +27,16 @@ class NullEventStorage implements EventStorageInterface
      * @param int $count
      * @return StoredEventInterface[]
      */
-    public function fetchMultipleEvents($count = 1)
+    public function fetchMultipleEvents(int $count = 1): array
     {
-        return array();
+        return [];
     }
 
     /**
      * @param StoredEventInterface $event
      * @return bool
      */
-    public function removeEvent(StoredEventInterface $event)
+    public function removeEvent(StoredEventInterface $event): bool
     {
         return true;
     }

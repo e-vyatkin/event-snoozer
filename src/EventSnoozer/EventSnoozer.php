@@ -36,7 +36,7 @@ class EventSnoozer
      * @param string $snoozeTime
      * @return bool
      */
-    public function snoozeEvent($eventName, Event $event, $snoozeTime = '+1 min')
+    public function snoozeEvent(string $eventName, Event $event, string $snoozeTime = '+1 min'): bool
     {
         $storedEvent = new StoredEvent();
         $storedEvent->setEventClass(get_class($event))
@@ -53,7 +53,7 @@ class EventSnoozer
     /**
      * @return bool
      */
-    public function dispatchSnoozedEvent()
+    public function dispatchSnoozedEvent(): bool
     {
         $event = $this->getEventStorage()->fetchEvent();
 
@@ -79,12 +79,13 @@ class EventSnoozer
      * @param int $count
      * @return int
      */
-    public function dispatchMultipleSnoozedEvents($count = 1)
+    public function dispatchMultipleSnoozedEvents(int $count = 1): int
     {
         $events = $this->getEventStorage()->fetchMultipleEvents($count);
 
         $dispatched = 0;
         foreach ($events as $event) {
+            /** @var StoredEventInterface $event */
             if (class_exists($event->getEventClass())) {
                 $className = $event->getEventClass();
                 $realEvent = new $className();
@@ -107,7 +108,7 @@ class EventSnoozer
      * @param Event $event
      * @return Event
      */
-    public function dispatchEvent($eventName, Event $event)
+    public function dispatchEvent(string $eventName, Event $event): Event
     {
         return $this->getEventDispatcher()->dispatch($eventName, $event);
     }
@@ -115,7 +116,7 @@ class EventSnoozer
     /**
      * @return EventDispatcherInterface
      */
-    protected function getEventDispatcher()
+    protected function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->eventDispatcher;
     }
@@ -123,7 +124,7 @@ class EventSnoozer
     /**
      * @return EventStorageInterface
      */
-    protected function getEventStorage()
+    protected function getEventStorage(): EventStorageInterface
     {
         return $this->eventStorage;
     }

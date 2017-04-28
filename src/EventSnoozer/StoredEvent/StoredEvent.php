@@ -41,14 +41,14 @@ class StoredEvent implements StoredEventInterface
     {
         $this->priority = 0;
         $this->runtime = new \DateTime();
-        $this->additionalData = array();
+        $this->additionalData = [];
     }
 
     /**
      * @param int|string $id
      * @return StoredEventInterface
      */
-    public function setId($id)
+    public function setId($id): StoredEventInterface
     {
         $this->id = $id;
 
@@ -67,7 +67,7 @@ class StoredEvent implements StoredEventInterface
      * @param \DateTime|string $runtime
      * @return StoredEventInterface
      */
-    public function setRuntime($runtime)
+    public function setRuntime($runtime): StoredEventInterface
     {
         if (is_string($runtime)) {
             $runtime = new \DateTime($runtime);
@@ -80,7 +80,7 @@ class StoredEvent implements StoredEventInterface
     /**
      * @return \DateTime
      */
-    public function getRuntime()
+    public function getRuntime(): \DateTime
     {
         return $this->runtime instanceof \DateTime ? $this->runtime : new \DateTime();
     }
@@ -89,7 +89,7 @@ class StoredEvent implements StoredEventInterface
      * @param string $className
      * @return StoredEventInterface
      */
-    public function setEventClass($className)
+    public function setEventClass(string $className): StoredEventInterface
     {
         $this->className = $className;
 
@@ -99,16 +99,16 @@ class StoredEvent implements StoredEventInterface
     /**
      * @return string
      */
-    public function getEventClass()
+    public function getEventClass(): string
     {
-        return $this->className;
+        return (string)$this->className;
     }
 
     /**
      * @param string $eventName
      * @return StoredEventInterface
      */
-    public function setEventName($eventName)
+    public function setEventName(string $eventName): StoredEventInterface
     {
         $this->eventName = $eventName;
 
@@ -118,16 +118,16 @@ class StoredEvent implements StoredEventInterface
     /**
      * @return string
      */
-    public function getEventName()
+    public function getEventName(): string
     {
-        return $this->eventName;
+        return (string)$this->eventName;
     }
 
     /**
      * @param int $priority
      * @return StoredEventInterface
      */
-    public function setPriority($priority)
+    public function setPriority(int $priority): StoredEventInterface
     {
         $this->priority = $priority;
 
@@ -137,16 +137,16 @@ class StoredEvent implements StoredEventInterface
     /**
      * @return int
      */
-    public function getPriority()
+    public function getPriority(): int
     {
-        return $this->priority;
+        return (int)$this->priority;
     }
 
     /**
      * @param array $additionalData
      * @return StoredEventInterface
      */
-    public function setAdditionalData(array $additionalData)
+    public function setAdditionalData(array $additionalData): StoredEventInterface
     {
         $this->additionalData = $additionalData;
 
@@ -156,7 +156,7 @@ class StoredEvent implements StoredEventInterface
     /**
      * @return array
      */
-    public function getAdditionalData()
+    public function getAdditionalData(): array
     {
         return $this->additionalData;
     }

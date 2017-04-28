@@ -10,7 +10,7 @@ interface EventStorageInterface
      * @param StoredEventInterface $event
      * @return bool
      */
-    public function saveEvent(StoredEventInterface $event);
+    public function saveEvent(StoredEventInterface $event): bool;
 
     /**
      * @return StoredEventInterface
@@ -21,13 +21,13 @@ interface EventStorageInterface
      * @param int $count
      * @return StoredEventInterface[]
      */
-    public function fetchMultipleEvents($count = 1);
+    public function fetchMultipleEvents(int $count = 1): array;
 
     /**
      * @param StoredEventInterface $event
      * @return bool
      */
-    public function removeEvent(StoredEventInterface $event);
+    public function removeEvent(StoredEventInterface $event): bool;
 
     /**
      * @param array $eventNames

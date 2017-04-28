@@ -63,16 +63,13 @@ class IsSameStoredEvent extends Constraint
                     );
                 }
             }
-
-
-
         } catch (ComparisonFailure $f) {
             if ($returnResult) {
                 return false;
             }
 
             throw new ExpectationFailedException(
-                \trim($description . "\n" . $f->getMessage()),
+                \trim($description."\n".$f->getMessage()),
                 $f
             );
         }

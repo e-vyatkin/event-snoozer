@@ -23,16 +23,16 @@ class MemoryEventStorage implements EventStorageInterface
 
     public function __construct()
     {
-        $this->storedEvents = array();
+        $this->storedEvents = [];
         $this->mode = false;
-        $this->eventRestrictions = array();
+        $this->eventRestrictions = [];
     }
 
     /**
      * @param StoredEventInterface $event
      * @return bool
      */
-    public function saveEvent(StoredEventInterface $event)
+    public function saveEvent(StoredEventInterface $event): bool
     {
         $event->setId(uniqid('es', true));
         $this->storedEvents[] = $event;
@@ -61,11 +61,11 @@ class MemoryEventStorage implements EventStorageInterface
      * @param int $count
      * @return StoredEventInterface[]
      */
-    public function fetchMultipleEvents($count = 1)
+    public function fetchMultipleEvents(int $count = 1): array
     {
         $this->sortEvents();
 
-        $events = array();
+        $events = [];
         $now = new \DateTime();
         foreach ($this->storedEvents as $event) {
             if ($event->getRuntime() < $now && $this->passedRestrictions($event->getEventName())) {
@@ -83,11 +83,12 @@ class MemoryEventStorage implements EventStorageInterface
      * @param StoredEventInterface $event
      * @return bool
      */
-    public function removeEvent(StoredEventInterface $event)
+    public function removeEvent(StoredEventInterface $event): bool
     {
         foreach ($this->storedEvents as $key => $storedEvent) {
             if ($storedEvent->getId() === $event->getId()) {
                 unset($this->storedEvents[$key]);
+
                 return true;
             }
         }
@@ -117,7 +118,7 @@ class MemoryEventStorage implements EventStorageInterface
      * @param string $eventName
      * @return bool
      */
-    private function passedRestrictions($eventName)
+    private function passedRestrictions(string $eventName): bool
     {
         return ($this->mode && in_array($eventName, $this->eventRestrictions, true)) ||
             (!$this->mode && !in_array($eventName, $this->eventRestrictions, true));
@@ -125,14 +126,17 @@ class MemoryEventStorage implements EventStorageInterface
 
     private function sortEvents()
     {
-        usort($this->storedEvents, function (StoredEventInterface $a, StoredEventInterface $b) {
-            if ($a->getPriority() < $b->getPriority()) {
-                return 1;
-            } elseif ($a->getPriority() > $b->getPriority()) {
-                return -1;
-            } else {
-                return $a->getRuntime() < $b->getRuntime() ? -1 : 1;
+        usort(
+            $this->storedEvents,
+            function (StoredEventInterface $a, StoredEventInterface $b) {
+                if ($a->getPriority() < $b->getPriority()) {
+                    return 1;
+                } elseif ($a->getPriority() > $b->getPriority()) {
+                    return -1;
+                } else {
+                    return $a->getRuntime() < $b->getRuntime() ? -1 : 1;
+                }
             }
-        });
+        );
     }
 }

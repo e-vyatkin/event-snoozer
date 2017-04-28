@@ -19,16 +19,16 @@ class RealEvent extends Event
     /**
      * @return int
      */
-    public function getPriority()
+    public function getPriority(): int
     {
-        return $this->priority ?: 0;
+        return $this->priority ? (int)$this->priority : 0;
     }
 
     /**
      * @param int $priority
      * @return RealEvent
      */
-    public function setPriority($priority)
+    public function setPriority(int $priority): RealEvent
     {
         $this->priority = $priority;
 
@@ -38,16 +38,16 @@ class RealEvent extends Event
     /**
      * @return array
      */
-    public function getAdditionalData()
+    public function getAdditionalData(): array
     {
-        return is_array($this->additionalData) ? $this->additionalData : array();
+        return is_array($this->additionalData) ? $this->additionalData : [];
     }
 
     /**
      * @param array $additionalData
      * @return RealEvent
      */
-    public function setAdditionalData(array $additionalData)
+    public function setAdditionalData(array $additionalData): RealEvent
     {
         $this->additionalData = $additionalData;
 

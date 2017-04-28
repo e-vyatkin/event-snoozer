@@ -11,10 +11,10 @@ class TestEventListener
 
     public function __construct()
     {
-        $this->firedEvents = array();
+        $this->firedEvents = [];
     }
 
-    public function onTestEvent(TestEvent $event)
+    public function onTestEvent(TestEvent $event): TestEvent
     {
         $this->firedEvents[] = $event;
 

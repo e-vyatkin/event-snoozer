@@ -8,7 +8,7 @@ interface StoredEventInterface
      * @param int|string $id
      * @return StoredEventInterface
      */
-    public function setId($id);
+    public function setId($id): StoredEventInterface;
 
     /**
      * @return int|string
@@ -16,57 +16,57 @@ interface StoredEventInterface
     public function getId();
 
     /**
-     * @param $runtime
+     * @param \DateTime|string $runtime
      * @return StoredEventInterface
      */
-    public function setRuntime($runtime);
+    public function setRuntime($runtime): StoredEventInterface;
 
     /**
      * @return \DateTime
      */
-    public function getRuntime();
+    public function getRuntime(): \DateTime;
 
     /**
      * @param string $className
      * @return StoredEventInterface
      */
-    public function setEventClass($className);
+    public function setEventClass(string $className): StoredEventInterface;
 
     /**
      * @return string
      */
-    public function getEventClass();
+    public function getEventClass(): string;
 
     /**
      * @param string $eventName
      * @return StoredEventInterface
      */
-    public function setEventName($eventName);
+    public function setEventName(string $eventName): StoredEventInterface;
 
     /**
      * @return string
      */
-    public function getEventName();
+    public function getEventName(): string;
 
     /**
      * @param int $priority
      * @return StoredEventInterface
      */
-    public function setPriority($priority);
+    public function setPriority(int $priority): StoredEventInterface;
 
     /**
      * @return int
      */
-    public function getPriority();
+    public function getPriority(): int;
 
     /**
      * @param array $additionalData
      * @return StoredEventInterface
      */
-    public function setAdditionalData(array $additionalData);
+    public function setAdditionalData(array $additionalData): StoredEventInterface;
 
     /**
      * @return array
      */
-    public function getAdditionalData();
+    public function getAdditionalData(): array;
 }
