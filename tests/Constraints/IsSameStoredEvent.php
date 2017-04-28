@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Constraints;
+namespace EventSnoozer\Tests\Constraints;
 
 use EventSnoozer\StoredEvent\StoredEvent;
 use PHPUnit\Framework\Constraint\Constraint;

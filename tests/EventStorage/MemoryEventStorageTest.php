@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\EventSnoozer\EventStorage;
+namespace EventSnoozer\Tests\EventStorage;
 
 use EventSnoozer\EventStorage\MemoryEventStorage;
 use EventSnoozer\StoredEvent\StoredEvent;
 use PHPUnit\Framework\TestCase;
-use Tests\EventSnoozer\TestEvent;
+use EventSnoozer\Tests\Mocks\TestEvent;
 
 class MemoryEventStorageTest extends TestCase
 {
@@ -13,7 +13,7 @@ class MemoryEventStorageTest extends TestCase
     {
         $storedEvent = new StoredEvent();
         $storedEvent->setEventName(TestEvent::NAME)
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('+1 day'))
             ->setPriority(123)
@@ -34,14 +34,14 @@ class MemoryEventStorageTest extends TestCase
     {
         $futureEvent = new StoredEvent();
         $futureEvent->setEventName(TestEvent::NAME)
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('+1 day'))
             ->setPriority(123)
             ->setId(456);
         $pastEvent = new StoredEvent();
         $pastEvent->setEventName(TestEvent::NAME)
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
@@ -61,21 +61,21 @@ class MemoryEventStorageTest extends TestCase
     {
         $futureEvent = new StoredEvent();
         $futureEvent->setEventName(TestEvent::NAME)
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('+1 day'))
             ->setPriority(123)
             ->setId(234);
         $pastEvent1 = new StoredEvent();
         $pastEvent1->setEventName(TestEvent::NAME)
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
             ->setId(345);
         $pastEvent2 = new StoredEvent();
         $pastEvent2->setEventName(TestEvent::NAME)
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-2 day'))
             ->setPriority(10)
@@ -101,14 +101,14 @@ class MemoryEventStorageTest extends TestCase
     {
         $futureEvent = new StoredEvent();
         $futureEvent->setEventName(TestEvent::NAME)
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('+1 day'))
             ->setPriority(123)
             ->setId(234);
         $pastEvent = new StoredEvent();
         $pastEvent->setEventName(TestEvent::NAME)
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
@@ -133,14 +133,14 @@ class MemoryEventStorageTest extends TestCase
     {
         $pastEvent1 = new StoredEvent();
         $pastEvent1->setEventName('test.event1')
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
             ->setId(345);
         $pastEvent2 = new StoredEvent();
         $pastEvent2->setEventName('test.event2')
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-2 day'))
             ->setPriority(10)
@@ -161,14 +161,14 @@ class MemoryEventStorageTest extends TestCase
     {
         $pastEvent1 = new StoredEvent();
         $pastEvent1->setEventName('test.event1')
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-1 day'))
             ->setPriority(123)
             ->setId(345);
         $pastEvent2 = new StoredEvent();
         $pastEvent2->setEventName('test.event2')
-            ->setEventClass('Tests\EventSnoozer\EventSnoozerTest\TestEvent')
+            ->setEventClass(TestEvent::class)
             ->setAdditionalData(['key' => 'value'])
             ->setRuntime(new \DateTime('-2 day'))
             ->setPriority(10)

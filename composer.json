@@ -9,10 +9,10 @@
         }
     ],
     "autoload": {
-        "psr-4": { "": "src/" }
+        "psr-4": { "EventSnoozer\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/" }
+        "psr-4": { "EventSnoozer\\Tests\\": "tests/" }
     },
     "minimum-stability": "stable",
     "require": {

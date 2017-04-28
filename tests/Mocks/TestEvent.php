@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\EventSnoozer;
+namespace EventSnoozer\Tests\Mocks;
 
 use EventSnoozer\RealEvent;
 
