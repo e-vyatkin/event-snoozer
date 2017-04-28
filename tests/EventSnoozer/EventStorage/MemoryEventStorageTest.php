@@ -4,9 +4,10 @@ namespace Tests\EventSnoozer\EventStorage;
 
 use EventSnoozer\EventStorage\MemoryEventStorage;
 use EventSnoozer\StoredEvent\StoredEvent;
+use PHPUnit\Framework\TestCase;
 use Tests\EventSnoozer\TestEvent;
 
-class MemoryEventStorageTest extends \PHPUnit_Framework_TestCase
+class MemoryEventStorageTest extends TestCase
 {
     public function testSaveEvent()
     {

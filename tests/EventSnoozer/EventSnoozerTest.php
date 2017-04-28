@@ -5,9 +5,10 @@ namespace Tests\EventSnoozer;
 use EventSnoozer\EventSnoozer;
 use EventSnoozer\EventStorage\EventStorageInterface;
 use EventSnoozer\StoredEvent\StoredEvent;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class EventSnoozerTest extends \PHPUnit_Framework_TestCase
+class EventSnoozerTest extends TestCase
 {
     public function testSnoozeEvent()
     {
