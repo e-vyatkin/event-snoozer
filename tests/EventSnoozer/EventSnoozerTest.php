@@ -7,6 +7,7 @@ use EventSnoozer\EventStorage\EventStorageInterface;
 use EventSnoozer\StoredEvent\StoredEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Tests\Constraints\IsSameStoredEvent;
 
 class EventSnoozerTest extends TestCase
 {
@@ -35,10 +36,10 @@ class EventSnoozerTest extends TestCase
             ->getMock();
         $eventStorageMock->expects(self::at(0))
             ->method('saveEvent')
-            ->with($firstStoredEvent);
+            ->with(new IsSameStoredEvent($firstStoredEvent));
         $eventStorageMock->expects(self::at(1))
             ->method('saveEvent')
-            ->with($secondStoredEvent);
+            ->with(new IsSameStoredEvent($secondStoredEvent));
         /** @var EventStorageInterface $eventStorageMock */
 
         $eventSnoozer = new EventSnoozer(new EventDispatcher(), $eventStorageMock);
