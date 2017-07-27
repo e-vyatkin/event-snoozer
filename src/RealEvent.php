@@ -21,7 +21,7 @@ class RealEvent extends Event
      */
     public function getPriority(): int
     {
-        return $this->priority ? (int)$this->priority : 0;
+        return (int)$this->priority;
     }
 
     /**
